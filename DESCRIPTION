@@ -1,19 +1,27 @@
 Package: usdc
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Current and historical circulation of USDC on officially supported blockchains (Algorand, Ethereum, Solana, Stellar)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Galen Simmons
+Maintainer: Galen Simmons <galen.simmons@gmail.com>
+Description: Data retrieval and plotting functionality to track circulation of USDC
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    knitr,
     rmarkdown
 VignetteBuilder: knitr
 Imports: 
     scales,
     httr,
-    jsonlite
+    jsonlite,
+    lubridate,
+    tidyselect,
+    dplyr,
+    knitr (>= 1.31)
+RoxygenNote: 7.1.1
+Language: en-US
+X-schema.org-applicationCategory: Blockchain
+X-schema.org-keywords: defi, usdc, ethereum, algorand, solana, stellar, blockchain, cryptocurrency
+Remotes:  
+    yihui/knitr

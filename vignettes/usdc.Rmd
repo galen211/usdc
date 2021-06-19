@@ -1,5 +1,7 @@
 ---
-title: "usdc"
+title: "Quickstart: usdc"
+author: Galen Simmons
+date: "2021-06-19"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{usdc}
@@ -7,22 +9,43 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include = FALSE, echo=FALSE}
+#library(usdc)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
-library(usdc)
+The goal of this document is to get you up and running with `usdc` as quickly as possible.
+
+## usdc basics
+To pull the current circulation of usdc on different blockchains, simply call the name of the chain to get the current circulating amount of USDC.
+
+```r
+algorand()
 ```
 
-Sample
-```{r}
-source("../R/current_circulation.R")
-library(httr)
+```r
+ethereum()
 ```
 
+```r
+solana()
+```
+
+```r
+stellar()
+```
+
+```r
+usdc_supply()
+```
+|datetime            |chain    |token_id                                                 | circulating_supply|
+|:-------------------|:--------|:--------------------------------------------------------|------------------:|
+|2021-06-18 21:52:59 |Ethereum |0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48               |        23495218869|
+|2021-06-18 21:52:59 |Algorand |31566704                                                 |          168948878|
+|2021-06-18 21:52:59 |Stellar  |GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN |           12896127|
+|2021-06-18 21:52:59 |Solana   |EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v             |          785000020|
 
 

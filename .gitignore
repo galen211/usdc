@@ -1,5 +1,11 @@
+.Rprofile
 .Rproj.user
-.Rhistory
-.RData
-.Ruserdata
+README_cache
+README.html
 inst/doc
+.Rapp.history
+.Rhistory
+.pkg-funs.R
+.DS_Store
+vignettes/*.R
+docs

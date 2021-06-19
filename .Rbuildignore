@@ -2,3 +2,8 @@
 ^renv\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
+^\.circleci$
+^\.circleci/config\.yml$
+^LICENSE\.md$
+^CODE_OF_CONDUCT\.md$

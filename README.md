@@ -1,9 +1,13 @@
-![](https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=010 | width=100)
+<img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" width="50"/>
 
-usdc
-====
+# usdc
+
+<!-- badges: start -->
+[![CircleCI build status](https://circleci.com/gh/galen211/usdc.svg?style=svg)](https://circleci.com/gh/galen211/usdc)
+<!-- badges: end -->
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
 [![cran checks](https://cranchecks.info/badges/worst/rnoaa)](https://cranchecks.info/pkgs/rnoaa)
 [![R-check](https://github.com/ropensci/rnoaa/workflows/R-check/badge.svg)](https://github.com/ropensci/rnoaa/actions)
 [![codecov.io](https://codecov.io/github/ropensci/rnoaa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/rnoaa?branch=master)
@@ -20,6 +24,15 @@ usdc
     * **Solana**: JSON RPC API provided by [Solana](https://docs.solana.com/developing/clients/jsonrpc-api)
     * **Stellar**: explorer API service through [Stellar Foundation](https://www.stellar.org/)
 
+
+## Installation
+To install `usdc` from CRAN, simply run `install.packages("usdc")`
+
+To install directly from github source, run `devtools::install_github('galen211/usdc')`
+
+## User guide
+This package includes a vignette which shows how to use the functions in `usdc` to gather data and generate common plots.  To access the vignette, run `vignette('usdc')`
+
 ## Roadmap
 The purpose of this project is to be a one-stop shop for analytics on Centre-issued Stablecoins for R users who want to use data science to understand the use of stablecoins on public blockchains.  Centre has a [subgraph](https://thegraph.com/explorer/subgraph/centrehq/usdc) hosted on the Graph Protocol, which is under development and may eventually expose some of the desired functionality on the roadmap below.
 
@@ -27,3 +40,8 @@ Outstanding Items:
 - Track each chains historical balance of USDC (currently, only the Ethereum balance is available in this package)
 - Track USDC token balances deposited in different lending and DEX protocols
 - Add ability to query the USDC subgraph using the Graph protocol
+
+
+## Code of Conduct
+  
+Please note that the usdc project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
