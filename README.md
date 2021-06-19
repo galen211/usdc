@@ -1,4 +1,5 @@
-![](https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=010 | width=100)
+<img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" width="100"/>
+
 
 usdc
 ====
