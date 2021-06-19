@@ -7,13 +7,14 @@
 #' @return the current circulating amount of USDC
 #' @examples
 #' fetch_supply_ethereum()
-#'
 #' @importFrom rlang .data
 fetch_supply_ethereum <- function() {
   . <- NULL
   r <- httr::GET("https://api.blockchair.com/ethereum/erc-20/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48/stats")
   stopifnot(httr::status_code(r) == 200)
-  t <- httr::content(r, as = 'text', encoding = 'UTF-8') %>% jsonlite::fromJSON() %>% .$data
+  t <- httr::content(r, as = "text", encoding = "UTF-8") %>%
+    jsonlite::fromJSON() %>%
+    .$data
   supply <- as.numeric(t$circulation) / 10**t$decimals
   return(supply)
 }
@@ -27,12 +28,11 @@ fetch_supply_ethereum <- function() {
 #' @return the current circulating amount of USDC
 #' @examples
 #' fetch_supply_algorand()
-#'
 #' @importFrom rlang .data
 fetch_supply_algorand <- function() {
   r <- httr::GET("https://algoexplorerapi.io/v1/asset/31566704")
   stopifnot(httr::status_code(r) == 200)
-  t <- httr::content(r, as = 'text', encoding = 'UTF-8') %>% jsonlite::fromJSON()
+  t <- httr::content(r, as = "text", encoding = "UTF-8") %>% jsonlite::fromJSON()
   supply <- as.numeric(t$circulatingsupply) / 10**t$decimal
   return(supply)
 }
@@ -46,17 +46,19 @@ fetch_supply_algorand <- function() {
 #' @return the current circulating amount of USDC
 #' @examples
 #' fetch_supply_stellar()
-#'
 #' @importFrom rlang .data
 fetch_supply_stellar <- function() {
   . <- NULL
   params <- list(
-    asset_code = 'USDC',
-    asset_issuer = 'GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN'
+    asset_code = "USDC",
+    asset_issuer = "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
   )
   r <- httr::GET("https://horizon.stellar.org/assets", query = params)
   stopifnot(httr::status_code(r) == 200)
-  t <- httr::content(r, as = 'text', encoding = 'UTF-8') %>% jsonlite::fromJSON() %>% .$`_embedded` %>% .$records
+  t <- httr::content(r, as = "text", encoding = "UTF-8") %>%
+    jsonlite::fromJSON() %>%
+    .$`_embedded` %>%
+    .$records
   supply <- as.numeric(t$amount)
   return(supply)
 }
@@ -70,18 +72,21 @@ fetch_supply_stellar <- function() {
 #' @return the current circulating amount of USDC
 #' @examples
 #' fetch_supply_solana()
-#'
 #' @importFrom rlang .data
 fetch_supply_solana <- function() {
   . <- NULL
   params <- '{"jsonrpc":"2.0", "id":1, "method":"getTokenSupply", "params": ["EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"]}'
 
   r <- httr::POST("https://api.mainnet-beta.solana.com/",
-            httr::content_type_json(),
-            body = params)
+    httr::content_type_json(),
+    body = params
+  )
   stopifnot(httr::status_code(r) == 200)
 
-  t <- httr::content(r, as = 'text') %>% jsonlite::fromJSON() %>% .$result %>% .$value
+  t <- httr::content(r, as = "text") %>%
+    jsonlite::fromJSON() %>%
+    .$result %>%
+    .$value
   supply <- as.numeric(t$amount) / 10**t$decimals
   return(supply)
 }
@@ -104,10 +109,10 @@ fetch_supply_usdc <- function() {
   last_updated <- lubridate::now()
 
   tb <- tibble::tibble(
-    datetime = c(last_updated,last_updated,last_updated,last_updated),
-    chain = c("Ethereum","Algorand","Stellar","Solana"),
-    token_id = c("0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48","31566704","GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN","EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"),
-    circulating_supply = c(ethereum_supply,algorand_supply,stellar_supply,solana_supply)
+    datetime = c(last_updated, last_updated, last_updated, last_updated),
+    chain = c("Ethereum", "Algorand", "Stellar", "Solana"),
+    token_id = c("0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", "31566704", "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"),
+    circulating_supply = c(ethereum_supply, algorand_supply, stellar_supply, solana_supply)
   )
   return(tb)
 }

@@ -7,11 +7,11 @@
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/usdc?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/usdc)](https://cran.r-project.org/package=usdc)
 [![CircleCI](https://circleci.com/gh/galen211/usdc/tree/master.svg?style=svg)](https://circleci.com/gh/galen211/usdc/tree/master)
+[![Codecov test coverage](https://codecov.io/gh/galen211/usdc/branch/master/graph/badge.svg)](https://codecov.io/gh/galen211/usdc?branch=master)
 
+`usdc` is an R package that exposes functions to fetch current and historical data on the USDC stablecoin.  USDC is issued by the [Centre Consortium](https://www.centre.io/).  The purpose of this package is to make it easy to perform data analysis on Centre-issued Stablecoins.  Stablecoins are growing rapidly in adoption, and this package saves time for R users who want to dive straight into data science without having to solve for data collection on multiple blockchains.
 
-`usdc` is an R package that exposes functions to fetch current supply and historical metrics on the USDC stablecoin token.  USDC is issued by the [Centre Consortium](https://www.centre.io/).  The purpose of this package is to make it easy to perform analytics on Centre-issued Stablecoins.  Stablecoins are growing rapidly in adoption, and this package saves time for R users who want to drive straight into data science without having to solve for data collection on multiple blockchains.
-
-This package is under active development and currently only covers historical circulation data on Ethereum.  This package is not an official project of the Centre Consortium and there is no express or implied warranty regarding the accuracy of any information provided through this package.  Detailed information about Centre can be found on their website and in their [whitepaper](https://f.hubspotusercontent30.net/hubfs/9304636/PDF/centre-whitepaper.pdf).  More information about the data sources used to provide current and historical USDC data can be found below.
+This package is under active development and currently only has coverage for historical circulation data on Ethereum.  This package is not an official project of the Centre Consortium.  Detailed information about Centre can be found on their website and in their [whitepaper](https://f.hubspotusercontent30.net/hubfs/9304636/PDF/centre-whitepaper.pdf).  More information about the data sources used to provide current and historical USDC data can be found below.
 
 ## Usage
 
@@ -34,7 +34,7 @@ df <- fetch_supply_usdc()
 
 ### Historical Metrics
 
-Fetch and store the historical supply of USDC on Ethereum in a tibble data frame.  Note that this function support CoinMetric's definitions for metrics.  For more information on CoinMetric's API see, https://docs.coinmetrics.io/api/v4
+Fetch and store the historical supply of USDC on Ethereum in a tibble data frame.  Note that this function support Coin Metrics' definitions for metrics.  For more information on Coin Metrics' API see, https://docs.Coin Metrics.io/api/v4
 ```r
 df <- fetch_historical_ethereum(metric = "CapMrktCurUSD")
 tail(df)
@@ -48,7 +48,7 @@ tail(df)
 |2021-06-17 | 23265686419|CapMrktCurUSD |Ethereum   |
 |2021-06-18 | 23499032393|CapMrktCurUSD |Ethereum   |
 
-Fetch and store the amount of daily active USDC supply on Ethereum in a tibble data frame.  Note that this function uses the CoinMetrics API field `SplyAct1d`.  Other metrics can also be substituted.
+Fetch and store the amount of daily active USDC supply on Ethereum in a tibble data frame.  Note that this function uses the Coin Metrics API field `SplyAct1d`.  Other metrics can also be substituted.
 ```r
 df <- fetch_historical_ethereum(metric = "SplyAct1d")
 tail(df)
@@ -61,6 +61,23 @@ tail(df)
 |2021-06-16 |  9853525925|SplyAct1d   |Ethereum   |
 |2021-06-17 |  9733206839|SplyAct1d   |Ethereum   |
 |2021-06-18 |  9667080264|SplyAct1d   |Ethereum   |
+
+#### Coin Metrics fields
+An internal dataset holds the fields which are currently available through the Coin Metrics API.  To view the dataset, simply type `metrics`.  The example below shows some of the supported fields:
+```r
+library(usdc)
+library(dplyr)
+library(knitr)
+metrics %>% select(id, description) %>% slice_sample(n=5) %>% kable()
+```
+|id              |description                                                                                                                                                                                                                                                                                   |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|AdrBal1in10MCnt |The sum count of unique addresses holding at least one ten-millionth ownership of the current supply of native units as of the end of that interval. Only native units are considered (e.g., an address with less than one ten-millionth ETH but with ERC-20 tokens would not be considered). |
+|FeeByteMeanNtv  |The mean transaction fee per byte of all blocks that interval in native units.                                                                                                                                                                                                                |
+|SplyAdrBalUSD1  |The sum of all native units being held in addresses whose balance was $1 or greater at the end of that interval. Only native units are considered (e.g., an address with less than X ETH but with more than X in ERC-20 tokens would not be considered).                                      |
+|BlkSizeMeanByte |The mean size (in bytes) of all blocks created that day.                                                                                                                                                                                                                                      |
+|FeeTotUSD       |The sum USD value of all fees paid to miners that interval. Fees do not include new issuance.                                                                                                                                                                                                 |
+
 
 ### Plotting
 
@@ -85,7 +102,7 @@ chart_historical_supply_usdc()
     * **Ethereum**: [Blockchair](https://blockchair.com/) explorer API service
     * **Solana**: [Solana](https://docs.solana.com/developing/clients/jsonrpc-api) JSON RPC API
     * **Stellar**: [Stellar Foundation](https://www.stellar.org/) explorer API service
-* Historical USDC metrics are fetched from the [CoinMetrics](https://docs.coinmetrics.io/api/v4) API
+* Historical USDC metrics are fetched from the [Coin Metrics](https://docs.Coin Metrics.io/api/v4) API
 
 ## Roadmap
 Centre is developing a graphql [subgraph](https://thegraph.com/explorer/subgraph/centrehq/usdc), which may eventually expand the scope of data analysis interfaces that can be provided by this package.  Some ideas for future functionality are described on the roadmap below.

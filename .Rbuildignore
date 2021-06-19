@@ -8,6 +8,7 @@
 ^LICENSE\.md$
 ^CODE_OF_CONDUCT\.md$
 ^CRAN-RELEASE$
-dev.Rmd
-dev.nb.html
 img/
+^codecov\.yml$
+README.md
+dev_notes/

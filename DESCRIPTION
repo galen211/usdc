@@ -12,7 +12,10 @@ Description: `usdc` is an R interface to data sources that can be used to track 
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    rmarkdown
+    covr,
+    rmarkdown,
+    spelling,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Imports: 
     scales,
@@ -25,9 +28,13 @@ Imports:
     tibble,
     knitr,
     ggplot2,
-    rlang
+    rlang,
+    ggthemes
 RoxygenNote: 7.1.1
 Language: en-US
 X-schema.org-applicationCategory: Blockchain
 X-schema.org-keywords: defi, usdc, ethereum, algorand, solana, stellar, blockchain, cryptocurrency
 License: MIT + file LICENSE
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)

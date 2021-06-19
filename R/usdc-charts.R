@@ -15,8 +15,9 @@ chart_current_supply_usdc <- function() {
     ggplot2::ggplot(ggplot2::aes(x = chain, y = circulating_supply)) +
     ggplot2::geom_bar(stat = "identity") +
     ggplot2::scale_y_continuous(labels = scales::dollar_format(scale = 1e-9, accuracy = 1)) +
-    ggplot2::xlab('Blockchain') + ggplot2::ylab('USDC Supply (Billions)') +
-    ggplot2::theme_light()
+    ggplot2::xlab("Blockchain") +
+    ggplot2::ylab("USDC Supply (Billions)") +
+    ggthemes::theme_economist_white()
 }
 
 #' Plot the historical USDC circulation on Ethereum
@@ -35,6 +36,7 @@ chart_historical_supply_usdc <- function() {
     ggplot2::ggplot(ggplot2::aes(x = date, y = value)) +
     ggplot2::geom_line(stat = "identity") +
     ggplot2::scale_y_continuous(labels = scales::dollar_format(scale = 1e-9, accuracy = 1)) +
-    ggplot2::xlab('Date') + ggplot2::ylab('USDC Supply, Ethereum (Billions)') +
-    ggplot2::theme_light()
+    ggplot2::xlab("Date") +
+    ggplot2::ylab("USDC Supply, Ethereum (Billions)") +
+    ggthemes::theme_economist_white()
 }
