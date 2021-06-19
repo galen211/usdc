@@ -7,7 +7,7 @@
 #'
 #' @param metric (character) A valid CoinMetrics asset metric
 #' @return a dataframe with the historical USDC metrics (see: https://docs.coinmetrics.io/api/v4#operation/getCatalogAllMetrics)
-#' @example
+#' @examples
 #' ethereum_historical(metric = 'CapMrktCurUSD')
 ethereum_historical <- function(metric = 'CapMrktCurUSD') {
   match.arg(metric, coinmetrics_supported_metrics, several.ok = FALSE)
@@ -18,11 +18,11 @@ ethereum_historical <- function(metric = 'CapMrktCurUSD') {
     page_size = 10000
   )
   r <- httr::GET("https://community-api.coinmetrics.io/v4/timeseries/asset-metrics", query = params)
-  stopifnot(status_code(r) == 200)
+  stopifnot(httr::status_code(r) == 200)
   t <- httr::content(r, as = 'text', encoding = 'UTF-8') %>%
     jsonlite::fromJSON() %>%
     .$data %>%
-    rename(
+    dplyr::rename(
       date = `time`,
       value = metric) %>%
     dplyr::select(-asset) %>%
@@ -36,6 +36,8 @@ ethereum_historical <- function(metric = 'CapMrktCurUSD') {
   return(t)
 }
 
+#' Supported CoinMetrics metrics for USDC
+#'
 coinmetrics_supported_metrics <- c(
   'CapMrktCurUSD','SplyAct1d',
   'SplyAct7d','SplyAct30d',
