@@ -1,0 +1,28 @@
+---
+title: "usdc"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{usdc}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(usdc)
+```
+
+Sample
+```{r}
+source("../R/current_circulation.R")
+library(httr)
+```
+
+
+
