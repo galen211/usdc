@@ -1,7 +1,5 @@
 <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" width="50"/>
-
-usdc
-====
+# usdc
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![cran checks](https://cranchecks.info/badges/worst/rnoaa)](https://cranchecks.info/pkgs/rnoaa)
