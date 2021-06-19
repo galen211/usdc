@@ -29,6 +29,10 @@ jobs:
       - run:
           name: Check package
           command: R CMD check --as-cran --no-manual *tar.gz
+      - run:
+          name: Run code coverage
+          command: |
+            Rscript -e 'library(covr); codecov()'
       - store_artifacts:
           path: usdc.Rcheck/
       - save_cache:
