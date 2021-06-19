@@ -92,7 +92,7 @@ chart_historical_supply_usdc()
 Centre is developing a graphql [subgraph](https://thegraph.com/explorer/subgraph/centrehq/usdc), which may eventually expand the scope of data analysis interfaces that can be provided by this package.  Some ideas for future functionality are described on the roadmap below.
 
 **Roadmap Items:**
-    * Track each chain's historical balance of USDC
-    * Add additional convenience charts and chart customizations
-    * Query the Centre USDC subgraph using the Graph protocol
-    * Track USDC token balances deposited in different lending and DEX protocols
+ - Track each chain's historical balance of USDC
+ - Add additional convenience charts and chart customizations
+ - Query the Centre USDC subgraph using the Graph protocol
+ - Track USDC token balances deposited in different lending and DEX protocols
