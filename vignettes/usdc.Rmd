@@ -10,7 +10,6 @@ vignette: >
 ---
 
 ```{r, include = FALSE, echo=FALSE}
-#library(usdc)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -19,33 +18,63 @@ knitr::opts_chunk$set(
 
 The goal of this document is to get you up and running with `usdc` as quickly as possible.
 
-## usdc basics
-To pull the current circulation of usdc on different blockchains, simply call the name of the chain to get the current circulating amount of USDC.
-
+### Current Supply
+Print the value of current circulating supply to the console
 ```r
-algorand()
+library(usdc)
+print_all_chains()
+```
+|datetime            |chain    |token_id                                                 |circulating_supply |
+|:-------------------|:--------|:--------------------------------------------------------|:------------------|
+|2021-06-19 09:20:40 |Ethereum |0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48               |$23,523,192,840    |
+|2021-06-19 09:20:40 |Algorand |31566704                                                 |$180,804,866       |
+|2021-06-19 09:20:40 |Stellar  |GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN |$12,896,127        |
+|2021-06-19 09:20:40 |Solana   |EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v             |$785,000,020       |
+
+Fetch and store the current circulating supply in a tibble data frame
+```r
+df <- fetch_supply_usdc()
 ```
 
+### Historical Metrics
+
+Fetch and store the historical supply of USDC on Ethereum in a tibble data frame.  Note that this function support CoinMetric's definitions for metrics.  For more information on CoinMetric's API see, https://docs.coinmetrics.io/api/v4
 ```r
-ethereum()
+df <- fetch_historical_ethereum(metric = "CapMrktCurUSD")
+tail(df)
+```
+|date       |       value|measurement   |blockchain |
+|:----------|-----------:|:-------------|:----------|
+|2021-06-13 | 22983465371|CapMrktCurUSD |Ethereum   |
+|2021-06-14 | 23069134166|CapMrktCurUSD |Ethereum   |
+|2021-06-15 | 23167467437|CapMrktCurUSD |Ethereum   |
+|2021-06-16 | 23276979355|CapMrktCurUSD |Ethereum   |
+|2021-06-17 | 23265686419|CapMrktCurUSD |Ethereum   |
+|2021-06-18 | 23499032393|CapMrktCurUSD |Ethereum   |
+
+Fetch and store the number of daily active USDC supply on Ethereum in a tibble data frame.  Note that this function uses the CoinMetrics API field `SplyAct1d`.  Other metrics can also be substituted
+```r
+df <- fetch_historical_ethereum(metric = "SplyAct1d")
+tail(df)
+```
+|date       |       value|measurement |blockchain |
+|:----------|-----------:|:-----------|:----------|
+|2021-06-13 | 11847179390|SplyAct1d   |Ethereum   |
+|2021-06-14 | 12143159721|SplyAct1d   |Ethereum   |
+|2021-06-15 | 12515784380|SplyAct1d   |Ethereum   |
+|2021-06-16 |  9853525925|SplyAct1d   |Ethereum   |
+|2021-06-17 |  9733206839|SplyAct1d   |Ethereum   |
+|2021-06-18 |  9667080264|SplyAct1d   |Ethereum   |
+
+### Plotting
+
+Plot the current supply of USDC on each supported blockchain
+```r
+chart_current_supply_usdc()
 ```
 
+Plot the current supply of USDC on Ethereum
 ```r
-solana()
+chart_historical_supply_usdc()
 ```
-
-```r
-stellar()
-```
-
-```r
-usdc_supply()
-```
-|datetime            |chain    |token_id                                                 | circulating_supply|
-|:-------------------|:--------|:--------------------------------------------------------|------------------:|
-|2021-06-18 21:52:59 |Ethereum |0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48               |        23495218869|
-|2021-06-18 21:52:59 |Algorand |31566704                                                 |          168948878|
-|2021-06-18 21:52:59 |Stellar  |GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN |           12896127|
-|2021-06-18 21:52:59 |Solana   |EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v             |          785000020|
-
 

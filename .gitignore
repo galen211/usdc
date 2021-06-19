@@ -9,3 +9,5 @@ inst/doc
 .DS_Store
 vignettes/*.R
 docs
+dev.Rmd
+dev.nb.html

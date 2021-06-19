@@ -1,18 +1,21 @@
 <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" width="50"/>
 
-# usdc
+# USDC
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![cran checks](https://cranchecks.info/badges/worst/rnoaa)](https://cranchecks.info/pkgs/rnoaa)
-[![R-check](https://github.com/ropensci/rnoaa/workflows/R-check/badge.svg)](https://github.com/ropensci/rnoaa/actions)
-[![codecov.io](https://codecov.io/github/ropensci/rnoaa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/rnoaa?branch=master)
-[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/rnoaa?color=C9A115)](https://github.com/r-hub/cranlogs.app)
-[![cran version](https://www.r-pkg.org/badges/version/rnoaa)](https://cran.r-project.org/package=rnoaa)
+[![cran checks](https://cranchecks.info/badges/worst/usdc)](https://cranchecks.info/pkgs/usdc)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/usdc?color=C9A115)](https://github.com/r-hub/cranlogs.app)
+[![cran version](https://www.r-pkg.org/badges/version/usdc)](https://cran.r-project.org/package=usdc)
+[![CircleCI](https://circleci.com/gh/galen211/usdc/tree/master.svg?style=svg)](https://circleci.com/gh/galen211/usdc/tree/master)
 
-`usdc` is an R interface to data sources that can be used to track USDC in circulation on multiple blockchains and over time.  This package is under active development and currently only covers historical circulation data on Ethereum.  USDC is a US dollar-backed stablecoin issued by the [Centre Consortium](https://www.centre.io/).  This is not an official project of the Centre Consortium and there is no express or implied warranty regarding the accuracy of any information provided through this package.  Detailed information about Centre can be found on their website and in their [whitepaper](https://f.hubspotusercontent30.net/hubfs/9304636/PDF/centre-whitepaper.pdf).  More information about the data sources used to provide current and historical USDC data can be found below.
+
+`usdc` is an R package that exposes functions to fetch current supply and historical metrics on the USDC stablecoin token.  USDC is issued by the [Centre Consortium](https://www.centre.io/).  The purpose of this package is to make it easy to perform analytics on Centre-issued Stablecoins.  Stablecoins are growing rapidly in adoption, and this package saves time for R users who want to drive straight into data science without having to solve for data collection on multiple blockchains.
+
+This package is under active development and currently only covers historical circulation data on Ethereum.  This package is not an official project of the Centre Consortium and there is no express or implied warranty regarding the accuracy of any information provided through this package.  Detailed information about Centre can be found on their website and in their [whitepaper](https://f.hubspotusercontent30.net/hubfs/9304636/PDF/centre-whitepaper.pdf).  More information about the data sources used to provide current and historical USDC data can be found below.
 
 ## Usage
 
+### Current Supply
 Print the value of current circulating supply to the console
 ```r
 library(usdc)
@@ -25,46 +28,71 @@ print_all_chains()
 |2021-06-19 09:20:40 |Stellar  |GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN |$12,896,127        |
 |2021-06-19 09:20:40 |Solana   |EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v             |$785,000,020       |
 
-Store the current circulating supply in a tibble data frame
+Fetch and store the current circulating supply in a tibble data frame
 ```r
-library(usdc)
-df <- usdc_supply()
+df <- fetch_supply_usdc()
 ```
 
+### Historical Metrics
+
+Fetch and store the historical supply of USDC on Ethereum in a tibble data frame.  Note that this function support CoinMetric's definitions for metrics.  For more information on CoinMetric's API see, https://docs.coinmetrics.io/api/v4
+```r
+df <- fetch_historical_ethereum(metric = "CapMrktCurUSD")
+tail(df)
+```
+|date       |       value|measurement   |blockchain |
+|:----------|-----------:|:-------------|:----------|
+|2021-06-13 | 22983465371|CapMrktCurUSD |Ethereum   |
+|2021-06-14 | 23069134166|CapMrktCurUSD |Ethereum   |
+|2021-06-15 | 23167467437|CapMrktCurUSD |Ethereum   |
+|2021-06-16 | 23276979355|CapMrktCurUSD |Ethereum   |
+|2021-06-17 | 23265686419|CapMrktCurUSD |Ethereum   |
+|2021-06-18 | 23499032393|CapMrktCurUSD |Ethereum   |
+
+Fetch and store the number of daily active USDC supply on Ethereum in a tibble data frame.  Note that this function uses the CoinMetrics API field `SplyAct1d`.  Other metrics can also be substituted
+```r
+df <- fetch_historical_ethereum(metric = "SplyAct1d")
+tail(df)
+```
+|date       |       value|measurement |blockchain |
+|:----------|-----------:|:-----------|:----------|
+|2021-06-13 | 11847179390|SplyAct1d   |Ethereum   |
+|2021-06-14 | 12143159721|SplyAct1d   |Ethereum   |
+|2021-06-15 | 12515784380|SplyAct1d   |Ethereum   |
+|2021-06-16 |  9853525925|SplyAct1d   |Ethereum   |
+|2021-06-17 |  9733206839|SplyAct1d   |Ethereum   |
+|2021-06-18 |  9667080264|SplyAct1d   |Ethereum   |
+
+### Plotting
+
+Plot the current supply of USDC on each supported blockchain
+```r
+chart_current_supply_usdc()
+```
+<img src="./img/current_supply.png"/>
 
 
-## Data sources in `usdc`
+Plot the current supply of USDC on Ethereum
+```r
+chart_historical_supply_usdc()
+```
+<img src="./img/historical_supply.png"/>
+
+
+## Data sources used by `usdc`
 
 * Current USDC in circulation on each of the officially supported blockchains is provided through the webservices listed below:
-    * **Algorand**: explorer API service through [AlgoExplorer](https://algoexplorer.io/)
-    * **Ethereum**: explorer API service through [Blockchair](https://blockchair.com/)
-    * **Solana**: JSON RPC API provided by [Solana](https://docs.solana.com/developing/clients/jsonrpc-api)
-    * **Stellar**: explorer API service through [Stellar Foundation](https://www.stellar.org/)
+    * **Algorand**: [AlgoExplorer](https://algoexplorer.io/) explorer API service
+    * **Ethereum**: [Blockchair](https://blockchair.com/) explorer API service
+    * **Solana**: [Solana](https://docs.solana.com/developing/clients/jsonrpc-api) JSON RPC API
+    * **Stellar**: [Stellar Foundation](https://www.stellar.org/) explorer API service
+* Historical USDC metrics are fetched from the [CoinMetrics](https://docs.coinmetrics.io/api/v4) API
 
 ## Roadmap
-The purpose of this project is to be a one-stop shop for analytics on Centre-issued Stablecoins for R users who want to use data science to understand the use of stablecoins on public blockchains.  Centre has a [subgraph](https://thegraph.com/explorer/subgraph/centrehq/usdc) hosted on the Graph Protocol, which is under development and may eventually expose some of the desired functionality on the roadmap below.
+Centre is developing a graphql [subgraph](https://thegraph.com/explorer/subgraph/centrehq/usdc), which may eventually expand the scope of data analysis interfaces that can be provided by this package.  Some ideas for future functionality are described on the roadmap below.
 
-Outstanding Items:
-- Track each chains historical balance of USDC (currently, only the Ethereum balance is available in this package)
-- Track USDC token balances deposited in different lending and DEX protocols
-- Add ability to query the USDC subgraph using the Graph protocol
-
-
-# Scratch Code
-```r
-
-  # usdc_ethereum <- ethereum()
-  # usdc_algorand <- algorand()
-  # usdc_stellar <- stellar()
-  # usdc_solana <- solana()
-  # all <- usdc_ethereum + usdc_algorand + usdc_stellar + usdc_solana
-  #
-  # print('USDC Supply')
-  # print(paste0('-----------------------------------------'))
-  # print(paste0('      Ethereum USDC: ', scales::dollar(usdc_ethereum)))
-  # print(paste0('      Algorand USDC: ', scales::dollar(usdc_algorand)))
-  # print(paste0('       Stellar USDC: ', scales::dollar(usdc_stellar)))
-  # print(paste0('        Solana USDC: ', scales::dollar(usdc_solana)))
-  # print(paste0('-----------------------------------------'))
-  # print(paste0('Total USDC in circulation: ', scales::dollar(all)))
-```
+**Roadmap Items:**
+    * Track each chain's historical balance of USDC
+    * Add additional convenience charts and chart customizations
+    * Query the Centre USDC subgraph using the Graph protocol
+    * Track USDC token balances deposited in different lending and DEX protocols

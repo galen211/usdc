@@ -23,11 +23,10 @@ Imports:
     dplyr,
     magrittr,
     tibble,
-    knitr
+    knitr,
+    ggplot2
 RoxygenNote: 7.1.1
 Language: en-US
 X-schema.org-applicationCategory: Blockchain
 X-schema.org-keywords: defi, usdc, ethereum, algorand, solana, stellar, blockchain, cryptocurrency
-Remotes: 
-    yihui/knitr
 License: MIT + file LICENSE

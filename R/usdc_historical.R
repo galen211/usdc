@@ -8,8 +8,8 @@
 #' @param metric (character) A valid CoinMetrics asset metric
 #' @return a dataframe with the historical USDC metrics (see: https://docs.coinmetrics.io/api/v4#operation/getCatalogAllMetrics)
 #' @examples
-#' ethereum_historical(metric = 'CapMrktCurUSD')
-ethereum_historical <- function(metric = 'CapMrktCurUSD') {
+#' fetch_historical_ethereum(metric = 'CapMrktCurUSD')
+fetch_historical_ethereum <- function(metric = 'CapMrktCurUSD') {
   match.arg(metric, coinmetrics_supported_metrics, several.ok = FALSE)
 
   params <- list(
