@@ -10,14 +10,20 @@
 #' chart_current_supply_usdc()
 chart_current_supply_usdc <- function() {
   circulating_supply <- chain <- NULL
-  fetch_supply_usdc() %>%
+  df <- fetch_supply_usdc()
+  total_supply = sum(df$circulating_supply)
+  df %>%
     dplyr::arrange(dplyr::desc(circulating_supply)) %>%
     ggplot2::ggplot(ggplot2::aes(x = chain, y = circulating_supply)) +
     ggplot2::geom_bar(stat = "identity") +
     ggplot2::scale_y_continuous(labels = scales::dollar_format(scale = 1e-9, accuracy = 1)) +
-    ggplot2::xlab("Blockchain") +
-    ggplot2::ylab("USDC Supply (Billions)") +
-    ggthemes::theme_economist_white()
+    ggplot2::xlab("\nBlockchain") +
+    ggplot2::ylab("USD Billions\n") +
+    ggplot2::ggtitle("Current USDC Supply\n", subtitle = paste("Total Supply:", scales::dollar(total_supply, scale = 1e-9, accuracy = 0.1), "Billion")) +
+    ggthemes::theme_economist_white(
+      gray_bg = FALSE,
+      base_size = 12
+    )
 }
 
 #' Plot the historical USDC circulation on Ethereum
@@ -36,7 +42,11 @@ chart_historical_supply_usdc <- function() {
     ggplot2::ggplot(ggplot2::aes(x = date, y = value)) +
     ggplot2::geom_line(stat = "identity") +
     ggplot2::scale_y_continuous(labels = scales::dollar_format(scale = 1e-9, accuracy = 1)) +
-    ggplot2::xlab("Date") +
-    ggplot2::ylab("USDC Supply, Ethereum (Billions)") +
-    ggthemes::theme_economist_white()
+    ggplot2::xlab("\nDate") +
+    ggplot2::ylab("USD Billions\n") +
+    ggplot2::ggtitle("Historical USDC Supply\n", subtitle = "Ethereum") +
+    ggthemes::theme_economist_white(
+      gray_bg = FALSE,
+      base_size = 12
+    )
 }

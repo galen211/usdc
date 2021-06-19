@@ -1,0 +1,24 @@
+---
+title: "Produce Charts for README.md"
+output: html_notebook
+---
+
+```{r}
+library(devtools)
+devtools::load_all(path = "../")
+library(ggplot2)
+```
+
+```{r}
+p1 <- usdc::chart_current_supply_usdc()
+ggsave(filename = "../img/current_supply.png")
+p1
+```
+
+
+```{r}
+p2 <- usdc::chart_historical_supply_usdc()
+ggsave(filename = "../img/historical_supply.png")
+p2
+```
+

@@ -86,14 +86,14 @@ Plot the current supply of USDC on each supported blockchain
 ```r
 chart_current_supply_usdc()
 ```
-<img src="./img/current_supply.png"/>
+<img src="./img/current_supply.png" width="500"/>
 
 
 Plot the current supply of USDC on Ethereum
 ```r
 chart_historical_supply_usdc()
 ```
-<img src="./img/historical_supply.png"/>
+<img src="./img/historical_supply.png" width="500"/>
 
 
 ## Data sources used by `usdc`
