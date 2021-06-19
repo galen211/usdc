@@ -14,4 +14,5 @@ Queries the `stellar` horizon explorer to retrieve the asset balance of USDC
 }
 \examples{
 fetch_supply_stellar()
+
 }

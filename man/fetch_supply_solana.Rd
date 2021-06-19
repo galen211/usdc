@@ -14,4 +14,5 @@ Queries the `solana` JSON RPC api to retrieve the SPL token balance of USDC
 }
 \examples{
 fetch_supply_solana()
+
 }

@@ -14,4 +14,5 @@ Queries the `blockchair` explorer to retrieve the erc-20 balance of USDC
 }
 \examples{
 fetch_supply_ethereum()
+
 }

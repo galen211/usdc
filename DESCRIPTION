@@ -1,6 +1,6 @@
 Package: usdc
 Type: Package
-Title: Current and historical circulation of USDC on officially supported blockchains (Algorand, Ethereum, Solana, Stellar)
+Title: Current and Historical Circulation of USDC on Officially Supported Blockchains (Algorand, Ethereum, Solana, Stellar)
 Version: 0.1.0
 Author: Galen Simmons
 Maintainer: Galen Simmons <galen.simmons@gmail.com>
@@ -24,7 +24,8 @@ Imports:
     magrittr,
     tibble,
     knitr,
-    ggplot2
+    ggplot2,
+    rlang
 RoxygenNote: 7.1.1
 Language: en-US
 X-schema.org-applicationCategory: Blockchain

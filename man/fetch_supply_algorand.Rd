@@ -14,4 +14,5 @@ Queries the `AlgoExplorer` explorer to retrieve the ASA balance of USDC
 }
 \examples{
 fetch_supply_algorand()
+
 }

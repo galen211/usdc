@@ -10,6 +10,8 @@
 #' @examples
 #' fetch_historical_ethereum(metric = 'CapMrktCurUSD')
 fetch_historical_ethereum <- function(metric = 'CapMrktCurUSD') {
+  `time` <- asset <- value <- . <- NULL
+
   match.arg(metric, coinmetrics_supported_metrics, several.ok = FALSE)
 
   params <- list(

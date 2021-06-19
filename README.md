@@ -21,13 +21,12 @@ Print the value of current circulating supply to the console
 library(usdc)
 print_all_chains()
 ```
-|datetime            |chain    |token_id                                                 |circulating_supply |
-|:-------------------|:--------|:--------------------------------------------------------|:------------------|
-|2021-06-19 09:20:40 |Ethereum |0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48               |$23,523,192,840    |
-|2021-06-19 09:20:40 |Algorand |31566704                                                 |$180,804,866       |
-|2021-06-19 09:20:40 |Stellar  |GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN |$12,896,127        |
-|2021-06-19 09:20:40 |Solana   |EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v             |$785,000,020       |
-
+|datetime            |chain    |circulating_supply |
+|:-------------------|:--------|:------------------|
+|2021-06-19 09:20:40 |Ethereum |$23,523,192,840    |
+|2021-06-19 09:20:40 |Algorand |$180,804,866       |
+|2021-06-19 09:20:40 |Stellar  |$12,896,127        |
+|2021-06-19 09:20:40 |Solana   |$785,000,020       |
 Fetch and store the current circulating supply in a tibble data frame
 ```r
 df <- fetch_supply_usdc()
@@ -49,7 +48,7 @@ tail(df)
 |2021-06-17 | 23265686419|CapMrktCurUSD |Ethereum   |
 |2021-06-18 | 23499032393|CapMrktCurUSD |Ethereum   |
 
-Fetch and store the number of daily active USDC supply on Ethereum in a tibble data frame.  Note that this function uses the CoinMetrics API field `SplyAct1d`.  Other metrics can also be substituted
+Fetch and store the amount of daily active USDC supply on Ethereum in a tibble data frame.  Note that this function uses the CoinMetrics API field `SplyAct1d`.  Other metrics can also be substituted.
 ```r
 df <- fetch_historical_ethereum(metric = "SplyAct1d")
 tail(df)

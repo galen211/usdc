@@ -9,6 +9,7 @@
 #' @examples
 #' chart_current_supply_usdc()
 chart_current_supply_usdc <- function() {
+  circulating_supply <- chain <- NULL
   fetch_supply_usdc() %>%
     dplyr::arrange(dplyr::desc(circulating_supply)) %>%
     ggplot2::ggplot(ggplot2::aes(x = chain, y = circulating_supply)) +
@@ -29,6 +30,7 @@ chart_current_supply_usdc <- function() {
 #' @examples
 #' chart_historical_supply_usdc()
 chart_historical_supply_usdc <- function() {
+  circulating_supply <- date <- value <- NULL
   fetch_historical_ethereum(metric = "CapMrktCurUSD") %>%
     ggplot2::ggplot(ggplot2::aes(x = date, y = value)) +
     ggplot2::geom_line(stat = "identity") +
