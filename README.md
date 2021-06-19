@@ -27,6 +27,7 @@ print_all_chains()
 |2021-06-19 09:20:40 |Algorand |$180,804,866       |
 |2021-06-19 09:20:40 |Stellar  |$12,896,127        |
 |2021-06-19 09:20:40 |Solana   |$785,000,020       |
+
 Fetch and store the current circulating supply in a tibble data frame
 ```r
 df <- fetch_supply_usdc()
