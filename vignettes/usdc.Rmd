@@ -38,7 +38,7 @@ df <- fetch_supply_usdc()
 
 ### Historical Metrics
 
-Fetch and store the historical supply of USDC on Ethereum in a tibble data frame.  Note that this function support Coin Metrics' definitions for metrics.  For more information on Coin Metrics' API see, https://docs.Coin Metrics.io/api/v4
+Fetch and store the historical supply of USDC on Ethereum in a tibble data frame.  Note that this function support Coin Metrics' definitions for metrics.  For more information on Coin Metrics' API see, https://docs.coinmetrics.io/api/v4
 ```r
 df <- fetch_historical_ethereum(metric = "CapMrktCurUSD")
 tail(df)

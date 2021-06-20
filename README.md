@@ -35,7 +35,7 @@ df <- fetch_supply_usdc()
 
 ### Historical Metrics
 
-Fetch and store the historical supply of USDC on Ethereum in a tibble data frame.  Note that this function support Coin Metrics' definitions for metrics.  For more information on Coin Metrics' API see, https://docs.Coin Metrics.io/api/v4
+Fetch and store the historical supply of USDC on Ethereum in a tibble data frame.  Note that this function support Coin Metrics' definitions for metrics.  For more information on Coin Metrics' API see, https://docs.coinmetrics.io/api/v4
 ```r
 df <- fetch_historical_ethereum(metric = "CapMrktCurUSD")
 tail(df)
@@ -103,7 +103,7 @@ chart_historical_supply_usdc()
     * **Ethereum**: [Blockchair](https://blockchair.com/) explorer API service
     * **Solana**: [Solana](https://docs.solana.com/developing/clients/jsonrpc-api) JSON RPC API
     * **Stellar**: [Stellar Foundation](https://www.stellar.org/) explorer API service
-* Historical USDC metrics are fetched from the [Coin Metrics](https://docs.Coin Metrics.io/api/v4) API
+* Historical USDC metrics are fetched from the [Coin Metrics](https://docs.coinmetrics.io/api/v4) API
 
 ## Roadmap
 Centre is developing a graphql [subgraph](https://thegraph.com/explorer/subgraph/centrehq/usdc), which may eventually expand the scope of data analysis interfaces that can be provided by this package.  Some ideas for future functionality are described on the roadmap below.

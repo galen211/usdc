@@ -1,6 +1,6 @@
 Package: usdc
 Type: Package
-Title: USDC Blockchain Data from R
+Title: USDC and Centre Stablecoin Blockchain Data
 Version: 0.1.0
 Authors@R: person("Galen", "Simmons", email = "galen.simmons@gmail.com",
   role = c("aut", "cre"))
