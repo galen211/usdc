@@ -1,14 +1,17 @@
 Package: usdc
 Type: Package
-Title: Current and Historical Circulation of USDC on Officially Supported Blockchains (Algorand, Ethereum, Solana, Stellar)
+Title: USDC Blockchain Data from R
 Version: 0.1.0
-Author: Galen Simmons
+Authors@R: person("Galen", "Simmons", email = "galen.simmons@gmail.com",
+  role = c("aut", "cre"))
 Maintainer: Galen Simmons <galen.simmons@gmail.com>
-Description: `usdc` is an R interface to data sources that can be used to track USDC
-    in circulation on multiple blockchains and over time.  This package is under active 
-    development and currently only covers historical circulation data on Ethereum.  
-    USDC is a US dollar-backed stablecoin issued by the Centre Consortium.  This 
-    is not an official project of the Centre Consortium.
+Description: Client for data sources to track current and historical 'usdc' circulation
+    on blockchains officially supported by the Centre Consortium (Algorand, Ethereum,
+    Solana, Stellar).  USDC is a dollar-backed stablecoin issued by the Centre Consortium.  
+    This package utilizes block explorer APIs to retrieve current circulation data and the
+    Coin Metrics API to retrieve historical metrics.  Additional utility functions are
+    provided for charting and looking up the metrics definitions for Coin Metrics V4 API, 
+    which is documented at <https://docs.coinmetrics.io/api/v4>. 
 Encoding: UTF-8
 LazyData: true
 Suggests: 

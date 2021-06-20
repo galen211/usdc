@@ -9,7 +9,7 @@
 [![CircleCI](https://circleci.com/gh/galen211/usdc/tree/master.svg?style=svg)](https://circleci.com/gh/galen211/usdc/tree/master)
 [![Codecov test coverage](https://codecov.io/gh/galen211/usdc/branch/master/graph/badge.svg)](https://codecov.io/gh/galen211/usdc?branch=master)
 
-`usdc` is an R package that exposes functions to fetch current and historical data on the USDC stablecoin.  USDC is issued by the [Centre Consortium](https://www.centre.io/).  The purpose of this package is to make it easy to perform data analysis on Centre-issued Stablecoins.  Stablecoins are growing rapidly in adoption, and this package saves time for R users who want to dive straight into data science without having to solve for data collection on multiple blockchains.
+Client for data sources to track current and historical 'usdc' circulation on blockchains officially supported by the Centre Consortium (Algorand, Ethereum, Solana, Stellar).  USDC is a dollar-backed stablecoin issued by the [Centre Consortium](https://www.centre.io/).  This package utilizes block explorer APIs to retrieve current circulation data and the Coin Metrics API to retrieve historical metrics.  Additional utility functions are provided for charting and looking up the metrics definitions for Coin Metrics V4 API.
 
 This package is under active development and currently only has coverage for historical circulation data on Ethereum.  This package is not an official project of the Centre Consortium.  Detailed information about Centre can be found on their website and in their [whitepaper](https://f.hubspotusercontent30.net/hubfs/9304636/PDF/centre-whitepaper.pdf).  More information about the data sources used to provide current and historical USDC data can be found below.
 
