@@ -11,7 +11,7 @@
 fetch_supply_ethereum <- function() {
   . <- NULL
   r <- httr::GET("https://api.blockchair.com/ethereum/erc-20/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48/stats")
-  stopifnot(httr::status_code(r) == 200)
+  if(httr::http_error(r)){ 	warning("BlockChair webservice is unable to retrieve USDC balance on Ethereum") }
   t <- httr::content(r, as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON() %>%
     .$data
@@ -31,7 +31,7 @@ fetch_supply_ethereum <- function() {
 #' @importFrom rlang .data
 fetch_supply_algorand <- function() {
   r <- httr::GET("https://algoexplorerapi.io/v1/asset/31566704")
-  stopifnot(httr::status_code(r) == 200)
+  if(httr::http_error(r)){ 	warning("AlgoExplorer webservice is unable to retrieve USDC balance on Algorand") }
   t <- httr::content(r, as = "text", encoding = "UTF-8") %>% jsonlite::fromJSON()
   supply <- as.numeric(t$circulatingsupply) / 10**t$decimal
   return(supply)
@@ -54,7 +54,7 @@ fetch_supply_stellar <- function() {
     asset_issuer = "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
   )
   r <- httr::GET("https://horizon.stellar.org/assets", query = params)
-  stopifnot(httr::status_code(r) == 200)
+  if(httr::http_error(r)){ 	warning("Horizon webservice is unable to retrieve USDC balance on Stellar") }
   t <- httr::content(r, as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON() %>%
     .$`_embedded` %>%
@@ -81,7 +81,7 @@ fetch_supply_solana <- function() {
     httr::content_type_json(),
     body = params
   )
-  stopifnot(httr::status_code(r) == 200)
+  if(httr::http_error(r)){ 	warning("Solana RPC webservice is unable to retrieve USDC balance on Solana") }
 
   t <- httr::content(r, as = "text") %>%
     jsonlite::fromJSON() %>%
@@ -90,6 +90,26 @@ fetch_supply_solana <- function() {
   supply <- as.numeric(t$amount) / 10**t$decimals
   return(supply)
 }
+
+#' Fetch the current USDC circulation on TRON
+#'
+#' @description
+#' Queries the `tronscan` explorer to retrieve the TRC-20 balance of USDC
+#'
+#' @export
+#' @return the current circulating amount of USDC
+#' @examples
+#' fetch_supply_tron()
+#' @importFrom rlang .data
+fetch_supply_tron <- function() {
+  r <- httr::GET("https://apilist.tronscan.org/api/token_trc20?contract=TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8&showAll=1")
+  if(httr::http_error(r)){ 	warning("TronScan webservice is unable to retrieve USDC balance on TRON") }
+  t <- httr::content(r, as = "text", encoding = "UTF-8") %>% jsonlite::fromJSON() %>%
+    .$trc20_tokens
+  supply <- as.numeric(t$total_supply_with_decimals) / 10**6
+  return(supply)
+}
+
 
 #' Fetch the current USDC circulation on all official Centre blockchains
 #'
@@ -105,14 +125,19 @@ fetch_supply_usdc <- function() {
   algorand_supply <- fetch_supply_algorand()
   stellar_supply <- fetch_supply_stellar()
   solana_supply <- fetch_supply_solana()
+  tron_supply <- fetch_supply_tron()
 
   last_updated <- lubridate::now()
 
   tb <- tibble::tibble(
-    datetime = c(last_updated, last_updated, last_updated, last_updated),
-    chain = c("Ethereum", "Algorand", "Stellar", "Solana"),
-    token_id = c("0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", "31566704", "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"),
-    circulating_supply = c(ethereum_supply, algorand_supply, stellar_supply, solana_supply)
+    datetime = c(last_updated, last_updated, last_updated, last_updated, last_updated),
+    chain = c("Ethereum", "Algorand", "Stellar", "Solana", "TRON"),
+    token_id = c("0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                 "31566704",
+                 "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN",
+                 "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+                 "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8"),
+    circulating_supply = c(ethereum_supply, algorand_supply, stellar_supply, solana_supply, tron_supply)
   )
   return(tb)
 }

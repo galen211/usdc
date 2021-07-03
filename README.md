@@ -3,7 +3,7 @@
 # USDC
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![cran checks](https://cranchecks.info/badges/worst/usdc)](https://cranchecks.info/pkgs/usdc)
+[![cran checks](https://cranchecks.info/badges/summary/usdc)](https://cranchecks.info/pkgs/usdc)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/usdc?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/usdc)](https://cran.r-project.org/package=usdc)
 [![CircleCI](https://circleci.com/gh/galen211/usdc/tree/master.svg?style=svg)](https://circleci.com/gh/galen211/usdc/tree/master)
@@ -15,6 +15,17 @@ This package is under active development and currently only has coverage for his
 
 ## Usage
 
+### Installation
+To install via CRAN, run the following command
+```
+install.packages('usdc')
+```
+
+To install via Github, first install `devtools` and then run
+```
+devtools::install_github('galen211/usdc')
+```
+
 ### Current Supply
 Print the value of current circulating supply to the console
 ```r
@@ -23,10 +34,11 @@ print_all_chains()
 ```
 |datetime            |chain    |circulating_supply |
 |:-------------------|:--------|:------------------|
-|2021-06-19 09:20:40 |Ethereum |$23,523,192,840    |
-|2021-06-19 09:20:40 |Algorand |$180,804,866       |
-|2021-06-19 09:20:40 |Stellar  |$12,896,127        |
-|2021-06-19 09:20:40 |Solana   |$785,000,020       |
+|2021-07-03 09:40:03 |Ethereum |$24,655,736,469    |
+|2021-07-03 09:40:03 |Algorand |$176,118,855       |
+|2021-07-03 09:40:03 |Stellar  |$11,249,153        |
+|2021-07-03 09:40:03 |Solana   |$785,000,020       |
+|2021-07-03 09:40:03 |TRON     |$111,745,328       |
 
 Fetch and store the current circulating supply in a tibble data frame
 ```r
@@ -103,7 +115,11 @@ chart_historical_supply_usdc()
     * **Ethereum**: [Blockchair](https://blockchair.com/) explorer API service
     * **Solana**: [Solana](https://docs.solana.com/developing/clients/jsonrpc-api) JSON RPC API
     * **Stellar**: [Stellar Foundation](https://www.stellar.org/) explorer API service
+    * **TRON**: [TRON Scan](https://tronscan.org/#/) explorer API service
 * Historical USDC metrics are fetched from the [Coin Metrics](https://docs.coinmetrics.io/api/v4) API
+
+## Changelog
+ - `7/3/2021`: added basic http error catching logic and TRON blockchain USDC supply
 
 ## Roadmap
 Centre is developing a graphql [subgraph](https://thegraph.com/explorer/subgraph/centrehq/usdc), which may eventually expand the scope of data analysis interfaces that can be provided by this package.  Some ideas for future functionality are described on the roadmap below.

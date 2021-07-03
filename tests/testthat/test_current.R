@@ -15,3 +15,7 @@ test_that("Solana circulation fetches double value", {
 test_that("Stellar circulation fetches double value", {
   expect_type(fetch_supply_stellar(), "double")
 })
+
+test_that("Solana circulation fetches double value", {
+  expect_type(fetch_supply_tron(), "double")
+})
