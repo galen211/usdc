@@ -102,6 +102,7 @@ fetch_supply_solana <- function() {
 #' fetch_supply_tron()
 #' @importFrom rlang .data
 fetch_supply_tron <- function() {
+  . <- NULL
   r <- httr::GET("https://apilist.tronscan.org/api/token_trc20?contract=TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8&showAll=1")
   if(httr::http_error(r)){ 	warning("TronScan webservice is unable to retrieve USDC balance on TRON") }
   t <- httr::content(r, as = "text", encoding = "UTF-8") %>% jsonlite::fromJSON() %>%

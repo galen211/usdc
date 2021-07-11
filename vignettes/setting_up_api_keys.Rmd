@@ -1,0 +1,131 @@
+---
+title: "setting_up_api_keys"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{setting_up_api_keys}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(usdc)
+```
+
+## What is an API key?
+
+Like many other R packages that are API clients, `usdc` lets you set up and use an API key.
+An API key is a string that you communicate to the server (see [Wikipedia Page](https://en.wikipedia.org/wiki/Application_programming_interface_key)). The key is used by the server to identify you. This helps the server to manage your access, for example, giving access to specific services.
+
+
+## Why use one?
+
+Many APIs have a limit in the number of queries you can make in a given amount of time. Using an API key, because it identifies you, lets you go over this limit so the server knows it is not under a [Denial of Service (DoS) attack](https://en.wikipedia.org/wiki/Denial-of-service_attack).
+
+## Registering for an API key
+
+### Bitquery
+You can register a free API key at <https://graphql.bitquery.io/ide>
+You have to provide your name and a valid email address to register for an API key.
+
+The Bitquery API has a limit of 100,000 free calls per month on the Free plan tier currently
+
+## How to set up your API key in `usdc`
+
+Now that you have registered for an API key, you can use it in `usdc`. There are several ways to set up your API key in `usdc`.
+
+
+### Using `Sys.setenv()` during an interactive session
+
+One way to set up your API key without using the `key` argument is to use **environment variables**. Environment variables are system or user-defined variables that are used to store information during your R session.
+
+`usdc` searches for different environment variables for each available API service:
+- `BITQUERY_KEY` : for Bitquery
+- `THEGRAPH_KEY` : for The Graph's USDC subgraph
+- `BLOCKCHAIR_KEY` : for Blockchair
+
+```
+Sys.getenv("BITQUERY_KEY")
+```
+
+If none has been defined it should return `""`. You can then set the environment variable using the function `Sys.setenv()`:
+
+
+```r
+Sys.setenv(BITQUERY_KEY = "BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB")
+Sys.getenv("BITQUERY_KEY")
+#> [1] "BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB"
+```
+
+It is set up for the rest of your R session and `usdc` will automatically use it when you call the different functions. You can also use the `check_key()` function that should give the same result if your key is well set-up:
+
+
+```r
+library("usdc")
+check_key()
+#> [1] "BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB"
+```
+
+
+### Using the dedicated function `*_auth()`
+
+`usdc` provides the function `rr_auth()` that creates a well named environmental variable that can be used in the rest of your session:
+
+
+```r
+bitquery_auth("BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB")
+check_key()
+#> [1] "BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB"
+```
+
+This works so that you don't have to specify the name of the environmental variable by hand. Under the hood `bitquery_auth()` uses the same mechanism as explained in the above mentioned section.
+
+
+### Setting up your API key in an `.Rprofile` file
+
+Every time R starts it looks for `.Rprofile` files in different locations:
+
+- `R_HOME` the directory in which R is installed,
+- `HOME` the user's home directory,
+- R's current working directory.
+
+R only loads one `.Rprofile` file per session and thus an `.Rprofile` file at the project-level overrides files in other locations.
+
+The `.Rprofile` file is an R script that is launch each time R starts. Put it at the root of your project and type the following:
+
+```
+BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB = "BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB"
+```
+
+You can then reload your session and check that `usdc` managed to get your key by using the `check_key()` function:
+
+
+```r
+check_key()
+#> [1] "BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB"
+```
+
+Now `usdc` can use your SHERPA/RoMEO API key! See the [getting started vignette](usdc.html) for usage of `usdc` functions.
+
+
+### Setting up your API key in an `.Renviron` file
+
+`.Renviron` file follow the same loading rules as `.Rprofile` files, the only difference is that it is is a file whose only purpose is to store environment variables. To use your API key in an `.Renviron` you have to type the following (note the absence of quotes):
+
+```
+BITQUERY_KEY=BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB
+```
+
+You can then check that your key has been found using `check_key()`:
+
+
+```r
+check_key()
+#> [1] "BQY8IPItkNCP0iK8BqvmhSWV1pxpFqrB"
+```

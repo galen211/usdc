@@ -1,0 +1,74 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Load Libraries
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(jsonlite)
+library(dplyr)
+library(janitor)
+library(lubridate)
+library(ghql)
+```
+
+```{r}
+con <- GraphqlClient$new(
+  url = "https://graphql.bitquery.io/",
+  headers = list('Content-Type' = 'application/json')
+)
+```
+
+
+```{r}
+bitquery_qry <- '
+query ($network: EthereumNetwork!, $address: String!, $limit: Int!, $offset: Int!, $from: ISO8601DateTime, $till: ISO8601DateTime) {
+  ethereum(network: $network) {
+    smartContractCalls(options: {desc: "count", limit: $limit, offset: $offset}, date: {since: $from, till: $till}, smartContractAddress: {is: $address}) {
+      address: caller {
+        address
+        annotation
+        __typename
+      }
+      max_date: maximum(of: date)
+      count
+      gasValue(calculate: average)
+      __typename
+    }
+    __typename
+  }
+}'
+
+```
+
+```{r}
+variables <- jsonlite::fromJSON('
+{
+  "limit": 10,
+  "offset": 0,
+  "network": "ethereum",
+  "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+  "nativeCurrency": "ETH",
+  "from": "2021-06-12",
+  "till": "2021-07-11T23:59:59",
+  "dateFormat": "%Y-%m"
+}
+')
+```
+
+
+```{r}
+qry <- Query$new()
+qry$query('TopCallers', bitquery_qry)
+```
+
+```{r}
+x <- con$exec(qry$queries$TopCallers, variables = variables)
+```
+
+
+```{r}
+df <- x %>% fromJSON() %>% .$data %>% .$ethereum %>% .$smartContractCalls
+```
+

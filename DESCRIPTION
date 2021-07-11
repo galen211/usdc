@@ -1,13 +1,13 @@
 Package: usdc
 Type: Package
 Title: USDC and Centre Stablecoin Blockchain Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Galen", "Simmons", email = "galen.simmons@gmail.com",
   role = c("aut", "cre"))
 Maintainer: Galen Simmons <galen.simmons@gmail.com>
 Description: Client for data sources to track current and historical 'usdc' circulation
     on blockchains officially supported by the Centre Consortium (Algorand, Ethereum,
-    Solana, Stellar).  USDC is a dollar-backed stablecoin issued by the Centre Consortium.  
+    Solana, Stellar, TRON).  USDC is a dollar-backed stablecoin issued by the Centre Consortium.  
     This package utilizes block explorer APIs to retrieve current circulation data and the
     Coin Metrics API to retrieve historical metrics.  Additional utility functions are
     provided for charting and looking up the metrics definitions for Coin Metrics V4 API, 

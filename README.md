@@ -118,9 +118,6 @@ chart_historical_supply_usdc()
     * **TRON**: [TRON Scan](https://tronscan.org/#/) explorer API service
 * Historical USDC metrics are fetched from the [Coin Metrics](https://docs.coinmetrics.io/api/v4) API
 
-## Changelog
- - `7/3/2021`: added basic http error catching logic and TRON blockchain USDC supply
-
 ## Roadmap
 Centre is developing a graphql [subgraph](https://thegraph.com/explorer/subgraph/centrehq/usdc), which may eventually expand the scope of data analysis interfaces that can be provided by this package.  Some ideas for future functionality are described on the roadmap below.
 
