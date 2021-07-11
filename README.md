@@ -2,12 +2,7 @@
 
 # USDC
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![cran checks](https://cranchecks.info/badges/summary/usdc)](https://cranchecks.info/pkgs/usdc)
-[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/usdc?color=C9A115)](https://github.com/r-hub/cranlogs.app)
-[![cran version](https://www.r-pkg.org/badges/version/usdc)](https://cran.r-project.org/package=usdc)
-[![CircleCI](https://circleci.com/gh/galen211/usdc/tree/master.svg?style=svg)](https://circleci.com/gh/galen211/usdc/tree/master)
-[![Codecov test coverage](https://codecov.io/gh/galen211/usdc/branch/master/graph/badge.svg)](https://codecov.io/gh/galen211/usdc?branch=master)
+[![Project Status: Moved to http://example.com – The project has been moved to a new location, and the version at that location should be considered authoritative.](https://www.repostatus.org/badges/latest/moved.svg)](https://www.repostatus.org/#moved) to [https://github.com/galen211/stablecoin](https://github.com/galen211/stablecoin)
 
 Client for data sources to track current and historical 'usdc' circulation on blockchains officially supported by the Centre Consortium (Algorand, Ethereum, Solana, Stellar).  USDC is a dollar-backed stablecoin issued by the [Centre Consortium](https://www.centre.io/).  This package utilizes block explorer APIs to retrieve current circulation data and the Coin Metrics API to retrieve historical metrics.  Additional utility functions are provided for charting and looking up the metrics definitions for Coin Metrics V4 API.
 
